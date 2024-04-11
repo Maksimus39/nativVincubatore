@@ -149,22 +149,70 @@ for (const string of strings) {
 console.log(combinedString) // Hello world !
 
 
+// написать функцию map, которая работает аналогично методу map
+const map = (array, callback) => {
+    const result = []
+
+    for (let i = 0; i < array.length; i++) {
+        result.push(callback(array[i], i, array))
+    }
+    return result
+}
+// Дан массив со строками.Используя функцию map верните массив, сделав первую букву в словах заглавной
+const arr = ['apple', 'banana', 'car', 'dog', 'elephant']
+
+const arrNew = map(arr, (str) => {
+    return str[0].toUpperCase() + str.slice(1)
+})
 
 
+console.log(arrNew) // 'Apple','Banana','Car','Dog','Elephant'
 
 
+// Напишите функцию которая принимает массив и возвращает новый массив содержащий только имена
+
+const people = [
+    {name: 'John', age: 25},
+    {name: 'Jone', age: 30},
+    {name: 'Bob', age: 35},
+    {name: 'Michel', age: 21},
+    {name: 'Alice', age: 28}
+]
+
+const names = map(people, (person) => {
+    return person.name
+})
+
+console.log(names)
 
 
+// написать функцию filter, которая работает аналогично методу filter
+
+const filter = (array, callback) => {
+    const result = []
+
+    for (let i = 0; i < array.length; i++) {
+        if (callback(array[i], i, array)) {
+            result.push(array[i])
+        }
+    }
+    return result
+}
+
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const equalTwo = filter(nums, (num) => num % 2 === 0)
+console.log(equalTwo)
 
 
+// вывести массив людей чей возраст больше 25 лет
+const ageArray = filter(people, (person) => {
+    return person.age > 25
+})
+console.log(ageArray)
 
 
-
-
-
-
-
-
+const incllA = filter(people, (person) => person.name.toLowerCase().indexOf('a') !==-1)
+console.log(incllA)
 
 
 

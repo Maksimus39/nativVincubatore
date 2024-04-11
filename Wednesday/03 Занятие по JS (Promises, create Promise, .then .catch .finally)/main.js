@@ -47,8 +47,8 @@ const server = {
         return new Promise((resolve, reject) => {
             //....
             setTimeout(() => {
-                resolve('Some data Max')
-                //reject('Some error Max')
+                resolve('some data')
+                // reject('Some error')
             }, 1000)
         })
     }
@@ -57,22 +57,37 @@ const server = {
 const promise = server.getData()
 
 // метод then
-promise.then((data)=>{
-    console.log('Then:',data)
-})
+promise
+    .then((data) => {
+        console.log('Then1 ', data)
+    })
+    .then((data) => {
+        console.log('Then2 ')
+        throw new Error('Error')
+    })
+    .then((data)=>{
+        console.log('Then3 ')
+    })
+    .catch(((error)=>{
+        console.log('Catch ',error)
+    }))
 
-// метод catch
-promise.catch((err)=>{
-    console.log('Catch:',err)
-})
-
-// метод finally
-promise.finally(()=>{
-    console.log('Finally result')
-    }
-)
 
 
+
+
+
+
+// // метод catch
+// promise.catch((err)=>{
+//     console.log('Catch:',err)
+// })
+//
+// // метод finally
+// promise.finally(()=>{
+//     console.log('Finally result')
+//     }
+// )
 
 
 // function newPromise(callback) {
