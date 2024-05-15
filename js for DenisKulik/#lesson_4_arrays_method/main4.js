@@ -65,21 +65,21 @@
 
 
 // immutable
-const cities = [
-    'New York',
-    'London',
-    'Paris',
-    'Tokyo',
-    'Sydney',
-    'Berlin',
-    'Moscow'
-]
-const displayCities = (arr) => {
-    arr.forEach((item)=>{
-         return console.log('Citi: ' + item)
-     })
-}
-displayCities(cities)
+// const cities = [
+//     'New York',
+//     'London',
+//     'Paris',
+//     'Tokyo',
+//     'Sydney',
+//     'Berlin',
+//     'Moscow'
+// ]
+// const displayCities = (arr) => {
+//     arr.forEach((item)=>{
+//          return console.log('Citi: ' + item)
+//      })
+// }
+// displayCities(cities)
 
 
 // forEach
@@ -89,17 +89,23 @@ displayCities(cities)
 // displayCities(cities)
 // City: New York...
 
+
 // map
 
-// Дан массив:
-// const array = [ '123', '456', '789' ]
-// Используя метод map преобразуйте этот массив в следующий:
+//Дан массив:
+//const array = [ '123', '456', '789' ]
+//Используя метод map преобразуйте этот массив в следующий:
 // [
 //     [1, 2, 3],
 //     [4, 5, 6],
 //     [7, 8, 9]
 // ];
+
+// const arrToMatrix = (arr) => {
+// return arr.map((el)=>el.split('').map(Number))
+// }
 // console.log(arrToMatrix(array))
+
 
 // Напишите функцию camelize, которая преобразует массив строк
 // вида «my-short-string» в «myShortString»
@@ -110,41 +116,89 @@ displayCities(cities)
 //     'list-style-image',
 //     'text-decoration'
 // ]
-// console.log(camelize(strings)) //  'fontSize', 'backgroundColor'...
+//
+// const camelize = (arr) => {
+//   return arr.map(el=>{
+//    return el.split('-').map((el,index)=>index===0?el.toLowerCase():el[0].toUpperCase()+el.slice(1)).join('')
+//   })
+// }
+//
+//  console.log(camelize(strings)) //  'fontSize', 'backgroundColor'...
+
 
 // filter
 
 // Напишите функцию jLanguages, которая возвращает массив слов, начинающихся с J
+
 // const languages = [ 'Java', 'TypeScript', 'C#', 'JavaScript', 'Julia' ]
+//
+// const jLanguages = (arr) => {
+//  return arr.filter(item=>item[0]==='J')
+// }
+//
 // console.log(jLanguages(languages)) //  'Java', 'JavaScript', 'Julia'
 
+
 // Напишите функцию flatArr. Оставьте в нем только обычные элементы.
-// const array = [ 1, 2, [ 3, 4 ], 'five', { a: 'test' } ]
+// const array = [1, 2, [3, 4], 'five', {a: 'test'}]
+// const flatArr = (arr) => {
+//     return arr.filter(el => typeof el !== "object")
+// }
 // console.log(flatArr(array)) // 1, 2, 'five'
+
 
 // Напишите функцию arrayDiff, должна удалять все значения из списка a,
 // которые присутствуют в списке b, сохраняя их порядок
+
 // const array1 = [ 1, 2, 2, 2, 3 ]
 // const array2 = [ 2 ]
+// const arrayDiff = (arr1,arr2) => {
+// return arr1.filter(el=>{
+//   if(!arr2.includes(el))return el
+// })
+// }
 // console.log(arrayDiff(array1, array2)) // [1,3]
+
 
 // reduce, reduceRight
 
 // Напишите функцию sumOfNums, которая принимает массив и возвращает сумму всех чисел массива
-// const nums = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+// const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+// const sumOfNums = (arr) => {
+//     return arr.reduce((acc, item) => {
+//         return acc + item
+//     }, 0)
+// }
 // console.log(sumOfNums(nums)) // 55
+
 
 // Напишите функцию getAverageAge которая принимает массив объектов со свойством age
 // и возвращает средний возраст.
-// const users = [
-//     { name: 'Bruce', age: 25 }, { name: 'Gloria', age: 19 },
-//     { name: 'David', age: 33 }, { name: 'Alice', age: 21 },
+//  const users = [
+//     {name: 'Bruce', age: 25}, {name: 'Gloria', age: 19},
+//     {name: 'David', age: 33}, {name: 'Alice', age: 21},
 // ]
+// const getAverageAge = (arr) => {
+//     return arr.reduce((acc, item) => {
+//         return acc + item.age
+//     }, 0)/ arr.length
+// }
 // console.log(getAverageAge(users)) // 24.5
+
+
+
+
+
 
 // Напишите функцию getUserNames которая принимает массив объектов users
 // и возвращает массив имен пользователей.
-// console.log(getUserNames(users)) // Bruce, Gloria, David, Alice
+// const getUserNames = (arr) => {
+//    return arr.reduce((acc, item) => {
+//        acc.push(item.name)
+//        return acc
+//    },[])
+// }
+//  console.log(getUserNames(users)) // Bruce, Gloria, David, Alice
 
 // Напишите функцию countSheeps, которая принимает массив булевых значений и возвращает
 // количество truthy-значений
@@ -156,6 +210,9 @@ displayCities(cities)
 //     true, true, true, true,
 //     false, false, true, true
 // ]
+// const countSheeps = (arr) => {
+//   return arr.reduce((acc,item) => acc+item, 0)
+// }
 // console.log(countSheeps(sheeps)) // 17
 
 // Новые методы массива 2023
