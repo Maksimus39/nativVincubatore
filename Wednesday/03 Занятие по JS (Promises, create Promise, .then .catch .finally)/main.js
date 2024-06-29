@@ -1,194 +1,166 @@
-// promise
+// pending | fulfilled | rejected
 
-// const fetch = (url, callback) => {
-//     // ......
-//
-//     callback(err, data)
-// }
-//
-
-
-// fetch('https://books.com/authors', (err, data) => {
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         fetch('https://books.com/authors/75', (err, data) => {
-//             if (err) {
-//                 console.log(err)
-//             } else {
-//                 fetch('https://books.com/authors/75/books', (err, data) => {
-//                     if (err) {
-//                         console.log(err)
-//                     } else {
-//                         fetch('https://books.com/authors/75/books/102', (err, data) => {
-//                             if (err) {
-//                                 console.log(err)
-//                             } else {
-//                                 fetch('https://books.com/authors/75/books/102/p333', (err, data) => {
-//                                     if (err) {
-//                                         console.log(err)
-//                                     } else {
-//
-//                                     }
-//                                 })
-//                             }
-//                         })
-//                     }
-//                 })
-//             }
-//         })
-//     }
+// const myPromise = new Promise((resolve, reject) => {
+//     // асинхронная логика
+//     setTimeout(() => {
+//         resolve('some data')
+//         reject('error')
+//     }, 2000)
 // })
-
-// fetch('https://books.com/authors')
-//     .then((data) => {
-//         return fetch('https://books.com/authors/75')
-//     })
-//     .then((data) => {
-//         return fetch('https://books.com/authors/75/books')
-//     })
-//     .then((data) => {
-//         return fetch('https://books.com/authors/75/books/102')
-//     })
-//     .then((data) => {
-//         return fetch('https://books.com/authors/75/books/102/p333')
-//     }).catch((err) => {
-//     console.log(err)
-// })
-
-
-
-
-
-
-
-// pending
-
-// const server = {
-//     getData() {
-//         return new Promise((resolve, reject) => {
-//             //....
-//             setTimeout(() => {
-//                 resolve('some data')
-//                 // reject('Some error')
-//             }, 1000)
-//         })
-//     }
-// }
+// console.log(myPromise)
 //
-// const promise = server.getData()
-//
-// // метод then
-// promise
-//     .then((data) => {
-//         console.log('Then1 ', data)
-//         return 10
-//     })
-//     .then((data) => {
-//         console.log('Then2 ', data)
-//        // throw new Error('Error')
-//     })
-//     .then((data) => {
-//         console.log('Then3 ', data)
-//     })
-//     .catch(((error) => {
-//         console.log('Catch1 ', error)
-//         //throw new Error('Error')
-//         return 20
-//     }))
-//     .finally((data)=>{
-//         console.log('Finally ',data)
-//         return 30
-//     })
-//     .then((data) => {
-//         console.log('Then4 ', data)
-//     })
-//     .catch(((error) => {
-//         console.log('Catch2 ', error)
-//     }))
-//     .finally((data)=>{
-//         console.log('Finally2 ',data)
-//         return 30
-//     })
-
-
-// // метод catch
-// promise.catch((err)=>{
-//     console.log('Catch:',err)
-// })
-//
-// // метод finally
-// promise.finally(()=>{
-//     console.log('Finally result')
-//     }
-// )
-
-
-// function newPromise(callback) {
-//     const resolve = (result) => {
+// function NewPromise(executor) {
+//     function resolve(data) {
 //         return {
 //             state: 'fulfilled',
-//             result: result
+//             response: data
 //         }
 //     }
 //
-//     const reject = (error) => {
+//     function reject(data) {
 //         return {
 //             state: 'rejected',
-//             result: error
+//             response: data
 //         }
 //     }
 //
-//     callback(resolve, reject)
+//     executor(resolve, reject)
 // }
-
 
 // const fs = require('fs')
 //
-// const readFile = (path) => {
-//     return new Promise((resolve, reject)=>{
-//         fs.readFile(path,(err,file)=>{
-//             if(err){
-//                 reject(err)
-//             }else {
-//                 resolve(file)
-//             }
-//         })
-//     })
-// }
-//
-// const promise=readFile('./index.js')
-
-
-
-
-// Задачки на промисы
-
-// Напиши функцию delay(ms), коьорая возвращает промис в состояние resolved через ms - миллисекунду
-// Пример использования
-
-
-// неверно
-// const delay0={
-//     getPr(){
-//         return new Promise((resolve, reject)=>{
-//             // ........
-//             setTimeout(()=>{
-//                 resolve ('server data')
-//             },10)
+// const filesAxios={
+//     readFile(){
+//         return new Promise((resolve, reject) => {
+//             fs.readFile('./index.html',(err,file)=>{
+//                 if(err){
+//                     reject('Some error',err)
+//                 }else {
+//                     resolve(file)
+//                 }
+//             })
 //         })
 //     }
 // }
+//
+//  filesAxios.readFile()
 
 
-
-
-// верно
-const delay = (time) => {
-  return new Promise((resolve,reject)=>{
-      setTimeout(resolve,time)
-  })
+const server = {
+    getData() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // resolve('Some data')
+                 reject('Some error: ')
+            }, 2000)
+        })
+    }
 }
-delay(4000).then(()=>{
-    console.log('Hello Promise')
-})
+
+server
+    .getData()
+    .catch((t) => t + 'catch1')
+    .catch((t) => t + 'catch2')
+    .catch((t) => t + 'then1')
+    .finally((t) => t + 'finally')
+    .then((t) => console.log(t))
+
+
+//const promise1 = server.getData()
+
+// обработка промиса
+
+// server
+//     .getData()
+//     .then((data) => {
+//         console.log('THEN:', data)
+//         return data
+//     })
+//     .then((data) => {
+//         console.log('THEN2:', data)
+//     })
+//     .catch((err) => {
+//         console.log('CATCH1', err)
+//         return b
+//     })
+//     .then((data) => {
+//         console.log('THEN3:', data)
+//         return 30
+//     })
+//     .catch(() => {
+//         console.log('CATCH2:',)
+//         return 40
+//     })
+//     .finally((data) => {
+//         console.log('FINALLY', data)
+//         return 20
+//     })
+//     .then((data) => {
+//         console.log('THEN4:', data)
+//     })
+//     .catch(()=>{
+//         console.log('CATCH3')
+//     })
+
+// server
+//     .getData()
+//     .then((data) => {
+//         console.log('THEN:', data)
+//         return new Promise((res)=>{
+//             setTimeout(()=>{
+//                 res('Some data2')
+//             },3000)
+//         })
+//     })
+//     .then((data) => {
+//         console.log('THEN2:', data)
+//     })
+
+
+// Задача
+
+// const delay = (ms)=>new Promise((res)=>setTimeout(()=>res('resolve'),ms));
+//
+// delay(2000).then((data)=>{
+//     console.log(data);
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
